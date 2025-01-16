@@ -1,0 +1,53 @@
+<Meta>
+  <title>Omega's Equipment Merchants</title>
+  <id>omegaplatinum.elin.omegasequipmentmerchants</id>
+  <author>OmegaPlatinum</author>
+  <loadPriority>100</loadPriority>
+  <description>
+    Adds a Weapon Merchant and an Armor Merchant to all major cities.
+    武器商人と防具商人をすべての主要都市に追加します。
+    
+    [h1] Features [/h1]
+    [list]
+    [*] Introduces a Weapon Merchant (Pod 042) and an Armor Merchant (Pod 153).
+    [*] Merchants appear in all major cities.
+    [*] Merchants scale their enchants based on the highest of the shop level, Void level, or player depth level.
+    [*] Mythical/godly rarity items are guaranteed.
+    [*] Adds enchantments and sockets to items based on the new level scaling but still within vanilla rules.
+    [/list]
+
+    [h1] Requirements [/h1]
+    This mod requires the [b]Custom Whatever Loader[/b] mod for core functionality. Please subscribe to the [b]Custom Whatever Loader[/b] mod to ensure compatibility:
+    [list]
+    [*][url=https://steamcommunity.com/workshop/filedetails/?id=3370512305]https://steamcommunity.com/workshop/filedetails/?id=3370512305[/url]
+    [/list]
+
+    [h1] Compatibility [/h1]
+    This mod works with existing save files.
+
+    Supports Game Version: 0.23.75.
+
+    [h1] 特徴 [/h1]
+    [list]
+    [*] 武器商人（ポッド042）と防具商人（ポッド153）を追加します。
+    [*] 商人はすべての主要都市に登場します。
+    [*] 商人のエンチャントは店のレベル、すくつのレベル、またはプレイヤーの深度レベルのうち最も高いレベルに基づいてスケーリングします。
+    [*] 神話の希少アイテムを保証します。
+    [*] 新しいレベルスケーリングに基づいて、バニラのルール内でアイテムにエンチャントとソケットを追加します。
+    [/list]
+
+    [h1] 必要条件 [/h1]
+    このMODの基本機能には [b]Custom Whatever Loader[/b] が必要です。互換性を確保するために、[b]Custom Whatever Loader[/b] を購読してください：
+    [list]
+    [*][url=https://steamcommunity.com/workshop/filedetails/?id=3370512305]https://steamcommunity.com/workshop/filedetails/?id=3370512305[/url]
+    [/list]
+
+    [h1] 互換性 [/h1]
+    このMODは既存のセーブデータと互換性があります。
+
+    対応ゲームバージョン: 0.23.75
+  </description>
+  <tags>General,Balance</tags>
+  <visibility>Public</visibility>
+  <version>0.23.75</version>
+</Meta>
