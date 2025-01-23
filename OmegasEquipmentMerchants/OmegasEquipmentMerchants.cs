@@ -6,8 +6,8 @@ namespace OmegasEquipmentMerchants
     internal static class ModInfo
     {
         internal const string Guid = "omegaplatinum.elin.omegasequipmentmerchants";
-        internal const string Name = "Omega's Equipment Merchants";
-        internal const string Version = "1.0.0.0";
+        internal const string Name = "Omegas Equipment Merchants";
+        internal const string Version = "1.2.1.0";
     }
 
     [BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
@@ -18,10 +18,9 @@ namespace OmegasEquipmentMerchants
         private void Awake()
         {
             Instance = this;
-        }
-
-        private void Start()
-        {
+            
+            OmegasEquipmentMerchantsConfig.LoadConfig(config: Config);
+            
             Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
         }
         

@@ -16,10 +16,9 @@ namespace OmegasEquipmentMerchants
 
             var inventory = __instance.owner.things.Find(id: "chest_merchant");
             int shopLv = __instance.ShopLv;
-            int voidLv = Mathf.Abs(value: EClass.game.spatials.Find(id: "void").GetDeepestLv()) + 50;
             int depthLv = EClass.player.stats.deepest;
             
-            int genLv = Mathf.Max(shopLv, voidLv, depthLv);
+            int genLv = Mathf.Max(shopLv, depthLv);
 
             if (inventory is null)
             {

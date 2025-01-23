@@ -14,6 +14,7 @@
     [*] Merchants scale their enchants based on the highest of the shop level, Void level, or player depth level.
     [*] Mythical/godly rarity items are guaranteed.
     [*] Adds enchantments and sockets to items based on the new level scaling but still within vanilla rules.
+    [*] Optionally adjust item costs using a configurable cost multiplier.
     [/list]
 
     [h1] Requirements [/h1]
@@ -25,6 +26,17 @@
     [h1] Compatibility [/h1]
     This mod works with existing save files.
 
+    [h1] Configuration [/h1]
+    Adjust these settings via the configuration file:
+
+    [h2] Cost Multiplier [/h2]
+    Set the multiplier for item costs in the shop.
+    Must be an integer value (e.g., 2 for double cost, 3 for triple cost).
+    [code] Default: 1 [/code]
+
+    [h1] Configuration File Location [/h1]
+    [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.omegasequipmentmerchants.cfg [/code]
+
     Supports Game Version: 0.23.75.
 
     [h1] 特徴 [/h1]
@@ -34,6 +46,7 @@
     [*] 商人のエンチャントは店のレベル、すくつのレベル、またはプレイヤーの深度レベルのうち最も高いレベルに基づいてスケーリングします。
     [*] 神話の希少アイテムを保証します。
     [*] 新しいレベルスケーリングに基づいて、バニラのルール内でアイテムにエンチャントとソケットを追加します。
+    [*] 設定可能なコスト倍率を使用してアイテムの価格をオプションで調整可能。
     [/list]
 
     [h1] 必要条件 [/h1]
@@ -44,6 +57,17 @@
 
     [h1] 互換性 [/h1]
     このMODは既存のセーブデータと互換性があります。
+
+    [h1] 設定 [/h1]
+    これらの設定は設定ファイルで調整できます：
+
+    [h2] コスト倍率 [/h2]
+    店内でのアイテムコストの倍率を設定します。
+    整数値で指定してください（例: 2 は価格が2倍、3 は価格が3倍になります）。
+    [code] 初期値: 1 [/code]
+
+    [h1] 設定ファイルの場所 [/h1]
+    [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.omegasequipmentmerchants.cfg [/code]
 
     対応ゲームバージョン: 0.23.75
   </description>
