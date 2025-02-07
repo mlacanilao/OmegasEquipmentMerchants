@@ -27,12 +27,13 @@ namespace OmegasEquipmentMerchants
 
             foreach (Thing item in inventory.things)
             {
-                if (item.rarity == Rarity.Mythical)
+                if (item.rarity == Rarity.Mythical || item.IsEquipmentOrRanged == false)
                 {
                     continue;
                 }
 
                 item.ChangeRarity(q: Rarity.Mythical);
+                item.c_IDTState = 0;
                 
                 if (item.category.slot != 0)
                 {
