@@ -37,7 +37,7 @@
     [h1] Configuration File Location [/h1]
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.omegasequipmentmerchants.cfg [/code]
 
-    Supports Game Version: 0.23.83
+    Supports Game Version: 0.23.92
 
     [h1] 特徴 [/h1]
     [list]
@@ -69,9 +69,9 @@
     [h1] 設定ファイルの場所 [/h1]
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.omegasequipmentmerchants.cfg [/code]
 
-    対応ゲームバージョン: 0.23.83
+    対応ゲームバージョン: 0.23.92
   </description>
   <tags>General,Balance</tags>
   <visibility>Public</visibility>
-  <version>0.23.83</version>
+  <version>0.23.92</version>
 </Meta>
