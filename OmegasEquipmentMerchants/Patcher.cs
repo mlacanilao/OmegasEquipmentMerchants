@@ -8,7 +8,7 @@ namespace OmegasEquipmentMerchants
         [HarmonyPatch(declaringType: typeof(ShopTransaction), methodName: nameof(ShopTransaction.GetPrice))]
         internal static void ShopTransactionGetPrice(ShopTransaction __instance, ref int __result)
         {
-            ShopTransactionPatch.GetPricePostfix(__instance: __instance, ref __result);
+            ShopTransactionPatch.GetPricePostfix(__instance: __instance, __result: ref __result);
         }
     }
 }

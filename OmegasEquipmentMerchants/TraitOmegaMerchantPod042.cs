@@ -24,23 +24,19 @@ class TraitOmegaMerchantPod042 : TraitMerchant
         int depthLv = EClass.player.stats.deepest;
         int genLv = Mathf.Max(a: shopLv, b: depthLv);
 
-        var allWeapons = SpawnList.Get(id: "eq").rows;
-        
-        HashSet<string> weaponCategories = new HashSet<string>
-        {
-            "dagger", "sword", "axe", "blunt", "polearm",
-            "scythe", "staff", "martial", "cane", "bow",
-            "crossbow", "gun"
-        };
+        var allWeapons = SpawnListThing.Get(id: "cat_weapon", func: (SourceThing.Row s) => 
+            EClass.sources.categories.map[key: s.category].IsChildOf(id: "weapon")).rows;
+
+        HashSet<string> excludeCategories = new HashSet<string> { "ammo", "throw" };
 
         foreach (var weaponRow in allWeapons)
         {
-            if (!weaponCategories.Contains(weaponRow.category))
+            if (excludeCategories.Contains(weaponRow.category))
             {
                 continue;
             }
             
-            CardBlueprint.Set(new CardBlueprint
+            CardBlueprint.Set(_bp: new CardBlueprint
             {
                 rarity = Rarity.Mythical
             });
@@ -48,7 +44,7 @@ class TraitOmegaMerchantPod042 : TraitMerchant
             Thing weapon = ThingGen.Create(id: weaponRow.id, lv: genLv);
 
             weapon.c_IDTState = 0;
-            
+
             inventory?.AddThing(t: weapon);
         }
     }
