@@ -47,5 +47,11 @@ class TraitOmegaMerchantPod153 : TraitMerchant
         
             inventory?.AddThing(t: armor);
         }
+        
+        var items = inventory?.things;
+        
+        if (items?.Count > items?.GridSize) {
+            items?.ChangeSize(w: items.width, h: items.Count / items.width + 1);
+        }
     }
 }

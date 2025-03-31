@@ -7,7 +7,7 @@ namespace OmegasEquipmentMerchants
     {
         internal const string Guid = "omegaplatinum.elin.omegasequipmentmerchants";
         internal const string Name = "Omegas Equipment Merchants";
-        internal const string Version = "2.0.1.0";
+        internal const string Version = "2.0.2.0";
     }
 
     [BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
