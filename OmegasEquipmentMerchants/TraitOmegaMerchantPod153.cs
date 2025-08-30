@@ -20,9 +20,12 @@ class TraitOmegaMerchantPod153 : TraitMerchant
             this.owner?.AddThing(t: inventory);
         }
 
+        const int MinGenLevel = 1;
+        const int MaxSafeGenLevel = 1_900_000_000;
+
         int shopLv = this.ShopLv;
         int depthLv = EClass.player.stats.deepest;
-        int genLv = Mathf.Max(a: shopLv, b: depthLv);
+        int genLv = Mathf.Clamp(value: Mathf.Max(a: shopLv, b: depthLv), min: MinGenLevel, max: MaxSafeGenLevel);
 
         var allArmors = SpawnListThing.Get(id: "cat_armor", func: (SourceThing.Row s) => 
             EClass.sources.categories.map[key: s.category].IsChildOf(id: "armor")).rows;
@@ -31,7 +34,7 @@ class TraitOmegaMerchantPod153 : TraitMerchant
 
         foreach (var armorRow in allArmors)
         {
-            if (excludeCategories.Contains(armorRow.category))
+            if (excludeCategories.Contains(item: armorRow.category))
             {
                 continue;
             }

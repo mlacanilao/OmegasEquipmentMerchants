@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,10 +20,13 @@ class TraitOmegaMerchantPod042 : TraitMerchant
             inventory = ThingGen.Create(id: "chest_merchant");
             this.owner?.AddThing(t: inventory);
         }
+        
+        const int MinGenLevel = 1;
+        const int MaxSafeGenLevel = 1_900_000_000;
 
         int shopLv = this.ShopLv;
         int depthLv = EClass.player.stats.deepest;
-        int genLv = Mathf.Max(a: shopLv, b: depthLv);
+        int genLv = Mathf.Clamp(value: Mathf.Max(a: shopLv, b: depthLv), min: MinGenLevel, max: MaxSafeGenLevel);
 
         var allWeapons = SpawnListThing.Get(id: "cat_weapon", func: (SourceThing.Row s) => 
             EClass.sources.categories.map[key: s.category].IsChildOf(id: "weapon")).rows;
@@ -31,7 +35,7 @@ class TraitOmegaMerchantPod042 : TraitMerchant
 
         foreach (var weaponRow in allWeapons)
         {
-            if (excludeCategories.Contains(weaponRow.category))
+            if (excludeCategories.Contains(item: weaponRow.category))
             {
                 continue;
             }
