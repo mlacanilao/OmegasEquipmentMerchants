@@ -1,8 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-class TraitOmegaMerchantPod042 : TraitMerchant
+namespace OmegasEquipmentMerchants;
+
+internal class TraitOmegaMerchantPod042 : TraitMerchant
 {
     public override ShopType ShopType
     {
@@ -12,50 +13,94 @@ class TraitOmegaMerchantPod042 : TraitMerchant
         }
     }
 
-    void _OnBarter()
+    private void _OnBarter()
     {
-        var inventory = this.owner?.things?.Find(id: "chest_merchant");
+        FeatureTestLog.Log(
+            feature: "Merchant Trait Dispatch",
+            detail: FeatureTestLog.FormatOwner(owner: owner) + ", trait=" + GetType().Name);
+
+        Thing? inventory = owner?.things?.Find(id: "chest_merchant");
         if (inventory is null)
         {
             inventory = ThingGen.Create(id: "chest_merchant");
-            this.owner?.AddThing(t: inventory);
+            owner?.AddThing(t: inventory);
+            FeatureTestLog.Log(
+                feature: "Merchant Chest",
+                detail: FeatureTestLog.FormatOwner(owner: owner) + ", created chest_merchant.");
         }
-        
-        const int MinGenLevel = 1;
-        const int MaxSafeGenLevel = 1_900_000_000;
 
-        int shopLv = this.ShopLv;
-        int depthLv = EClass.player.stats.deepest;
-        int genLv = Mathf.Clamp(value: Mathf.Max(a: shopLv, b: depthLv), min: MinGenLevel, max: MaxSafeGenLevel);
+        EquipmentScalingResult scaling = EquipmentScaling.GetResult(shopLv: ShopLv);
 
-        var allWeapons = SpawnListThing.Get(id: "cat_weapon", func: (SourceThing.Row s) => 
-            EClass.sources.categories.map[key: s.category].IsChildOf(id: "weapon")).rows;
+        int beforeCount = inventory?.things?.Count ?? 0;
+        ThingContainer? items = inventory?.things;
+        int inventoryWidth = OmegasEquipmentMerchantsConfig.GetMerchantInventoryWidth();
+
+        if (items is not null && items.width != inventoryWidth)
+        {
+            items.ChangeSize(w: inventoryWidth, h: items.height);
+        }
+
+        List<CardRow> allWeapons = SpawnListThing.Get(id: "cat_weapon", func: (SourceThing.Row s) =>
+        {
+            if (s.category.IsEmpty())
+            {
+                return false;
+            }
+
+            SourceCategory.Row? category = EClass.sources.categories.map.TryGetValue(key: s.category);
+            if (category is null)
+            {
+                return false;
+            }
+
+            return category.IsChildOf(id: "weapon");
+        }).rows;
 
         HashSet<string> excludeCategories = new HashSet<string> { "ammo", "throw" };
+        int generatedCount = 0;
+        int skippedCount = 0;
 
         foreach (var weaponRow in allWeapons)
         {
             if (excludeCategories.Contains(item: weaponRow.category))
             {
+                skippedCount++;
                 continue;
             }
-            
+
             CardBlueprint.Set(_bp: new CardBlueprint
             {
                 rarity = Rarity.Mythical
             });
 
-            Thing weapon = ThingGen.Create(id: weaponRow.id, lv: genLv);
+            Thing weapon = ThingGen.Create(id: weaponRow.id, lv: scaling.GenLv);
 
             weapon.c_IDTState = 0;
 
             inventory?.AddThing(t: weapon);
+            generatedCount++;
         }
-        
-        var items = inventory?.things;
-        
-        if (items?.Count > items?.GridSize) {
-            items?.ChangeSize(w: items.width, h: items.Count / items.width + 1);
+
+        if (items is not null)
+        {
+            int width = Mathf.Max(a: 1, b: items.width);
+            int neededHeight = Mathf.Max(a: 1, b: (items.Count + width - 1) / width);
+
+            if (items.height != neededHeight)
+            {
+                items.ChangeSize(w: width, h: neededHeight);
+            }
         }
+
+        FeatureTestLog.Log(
+            feature: "Weapon Merchant Stock",
+            detail: FeatureTestLog.FormatOwner(owner: owner) +
+                    ", " +
+                    FeatureTestLog.FormatStockResult(
+                        beforeCount: beforeCount,
+                        generatedCount: generatedCount,
+                        skippedCount: skippedCount,
+                        afterCount: items?.Count ?? 0,
+                        scaling: scaling));
     }
 }

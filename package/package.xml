@@ -11,10 +11,10 @@
     [list]
     [*] Introduces a Weapon Merchant (Pod 042) and an Armor Merchant (Pod 153).
     [*] Merchants appear in all major cities.
-    [*] Merchants scale their enchants based on the highest of the shop level, Void level, or player depth level.
-    [*] Mythical/godly rarity items are guaranteed.
+    [*] Generated equipment scales based on whichever is highest: shop level, the player's deepest danger/depth record, or fame scaling.
+    [*] Godly rarity items are guaranteed.
     [*] Adds enchantments and sockets to items based on the new level scaling but still within vanilla rules.
-    [*] Optionally adjust item costs using a configurable cost multiplier.
+    [*] Optionally adjust buy prices from Pod 042 and Pod 153 using a configurable cost multiplier.
     [/list]
 
     [h1] Requirements [/h1]
@@ -30,23 +30,32 @@
     Adjust these settings via the configuration file:
 
     [h2] Cost Multiplier [/h2]
-    Set the multiplier for item costs in the shop.
+    Set the multiplier for buy prices from Pod 042 and Pod 153.
     Must be an integer value (e.g., 2 for double cost, 3 for triple cost).
+    Sale prices stay vanilla.
+    Values below 1 are treated as 1, and values above 100 are treated as 100.
+    Final transaction prices above the game's integer limit are capped at 2147483646.
     [code] Default: 1 [/code]
+
+    [h2] Merchant Inventory Width [/h2]
+    Set the target inventory width, in columns, for Pod 042 and Pod 153 shop inventories.
+    Values below 8 are treated as 8, and values above 64 are treated as 64.
+    Inventory height grows or shrinks to fit generated stock.
+    [code] Default: 8 [/code]
 
     [h1] Configuration File Location [/h1]
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.omegasequipmentmerchants.cfg [/code]
 
-    Supports Game Version: EA 23.188 Stable
+    [img] https://img.shields.io/badge/Supports%20Game%20Version-EA%2023.307%20Stable-green [/img]
 
     [h1] 特徴 [/h1]
     [list]
     [*] 武器商人（ポッド042）と防具商人（ポッド153）を追加します。
     [*] 商人はすべての主要都市に登場します。
-    [*] 商人のエンチャントは店のレベル、すくつのレベル、またはプレイヤーの深度レベルのうち最も高いレベルに基づいてスケーリングします。
-    [*] 神話の希少アイテムを保証します。
+    [*] 生成される装備は、店のレベル、プレイヤーの到達した最深危険度/深度、または名声スケーリングのうち最も高い値に基づいてスケーリングします。
+    [*] 神器品質のアイテムを保証します。
     [*] 新しいレベルスケーリングに基づいて、バニラのルール内でアイテムにエンチャントとソケットを追加します。
-    [*] 設定可能なコスト倍率を使用してアイテムの価格をオプションで調整可能。
+    [*] 設定可能なコスト倍率で、ポッド042とポッド153から購入する価格を調整できます。
     [/list]
 
     [h1] 必要条件 [/h1]
@@ -62,16 +71,25 @@
     これらの設定は設定ファイルで調整できます：
 
     [h2] コスト倍率 [/h2]
-    店内でのアイテムコストの倍率を設定します。
+    ポッド042とポッド153から購入する価格の倍率を設定します。
     整数値で指定してください（例: 2 は価格が2倍、3 は価格が3倍になります）。
+    売却価格はバニラのままです。
+    1未満の値は1として扱われ、100を超える値は100として扱われます。
+    ゲームの整数上限を超える最終取引価格は2147483646に制限されます。
     [code] 初期値: 1 [/code]
+
+    [h2] 商人インベントリ幅 [/h2]
+    ポッド042とポッド153の店のインベントリ幅（列数）を設定します。
+    8未満の値は8として扱われ、64を超える値は64として扱われます。
+    生成された在庫に合わせて高さは増減します。
+    [code] 初期値: 8 [/code]
 
     [h1] 設定ファイルの場所 [/h1]
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.omegasequipmentmerchants.cfg [/code]
 
-    対応ゲームバージョン: EA 23.188 Stable
+    [img] https://img.shields.io/badge/対応ゲームバージョン-EA%2023.307%20Stable-green [/img]
   </description>
   <tags>General,Balance</tags>
   <visibility>Public</visibility>
-  <version>0.23.188</version>
+  <version>0.23.307</version>
 </Meta>
