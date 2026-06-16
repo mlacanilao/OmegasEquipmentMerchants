@@ -8,7 +8,7 @@ internal static class FeatureTestLog
 
     internal static void Log(string feature, string detail)
     {
-        OmegasEquipmentMerchants.LogInfo(message: "[FeatureTest] " + feature + ": " + detail);
+        OmegasEquipmentMerchants.LogDebug(message: "[FeatureTest] " + feature + ": " + detail);
     }
 
     internal static void LogOnce(string feature, string key, string detail)

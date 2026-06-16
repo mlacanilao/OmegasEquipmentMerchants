@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace OmegasEquipmentMerchants;
 
 internal readonly struct EquipmentScalingResult
@@ -34,9 +32,13 @@ internal static class EquipmentScaling
     {
         int depthLv = EClass.player.stats.deepest;
         int fameLv = EClass.pc.FameLv;
-        int fameShopLv = fameLv + fameLv / 2 + TravelMerchantFameBase;
-        int highestLv = Mathf.Max(a: Mathf.Max(a: shopLv, b: depthLv), b: fameShopLv);
-        int genLv = Mathf.Clamp(value: highestLv, min: MinGenLevel, max: MaxSafeGenLevel);
+        long fameShopLvLong = (long)fameLv + fameLv / 2L + TravelMerchantFameBase;
+        long highestLv = GetHighestLevel(
+            shopLv: shopLv,
+            depthLv: depthLv,
+            fameShopLv: fameShopLvLong);
+        int fameShopLv = ClampToInt(value: fameShopLvLong);
+        int genLv = ClampGenerationLevel(value: highestLv);
 
         return new EquipmentScalingResult(
             shopLv: shopLv,
@@ -44,5 +46,51 @@ internal static class EquipmentScaling
             fameLv: fameLv,
             fameShopLv: fameShopLv,
             genLv: genLv);
+    }
+
+    private static long GetHighestLevel(int shopLv, int depthLv, long fameShopLv)
+    {
+        long highestLv = shopLv;
+        if (depthLv > highestLv)
+        {
+            highestLv = depthLv;
+        }
+
+        if (fameShopLv > highestLv)
+        {
+            highestLv = fameShopLv;
+        }
+
+        return highestLv;
+    }
+
+    private static int ClampGenerationLevel(long value)
+    {
+        if (value < MinGenLevel)
+        {
+            return MinGenLevel;
+        }
+
+        if (value > MaxSafeGenLevel)
+        {
+            return MaxSafeGenLevel;
+        }
+
+        return (int)value;
+    }
+
+    private static int ClampToInt(long value)
+    {
+        if (value < int.MinValue)
+        {
+            return int.MinValue;
+        }
+
+        if (value > int.MaxValue)
+        {
+            return int.MaxValue;
+        }
+
+        return (int)value;
     }
 }
