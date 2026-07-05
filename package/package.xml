@@ -17,12 +17,6 @@
     [*] Optionally adjust buy prices from Pod 042 and Pod 153 using a configurable cost multiplier.
     [/list]
 
-    [h1] Requirements [/h1]
-    This mod requires the [b](Stable) Custom Whatever Loader[/b] mod for core functionality. Please subscribe to the [b](Stable) Custom Whatever Loader[/b] mod to ensure compatibility:
-    [list]
-    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3544010094]https://steamcommunity.com/sharedfiles/filedetails/?id=3544010094[/url]
-    [/list]
-
     [h1] Compatibility [/h1]
     This mod works with existing save files.
 
@@ -34,7 +28,6 @@
     Must be an integer value (e.g., 2 for double cost, 3 for triple cost).
     Sale prices stay vanilla.
     Values below 1 are treated as 1, and values above 100 are treated as 100.
-    Final transaction prices above the game's integer limit are capped at 2147483646.
     [code] Default: 1 [/code]
 
     [h2] Merchant Inventory Width [/h2]
@@ -46,7 +39,7 @@
     [h1] Configuration File Location [/h1]
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.omegasequipmentmerchants.cfg [/code]
 
-    [img] https://img.shields.io/badge/Supports%20Game%20Version-EA%2023.307%20Stable-green [/img]
+    [img] https://img.shields.io/badge/Supports%20Game%20Version-EA%2023.325%20Stable-green [/img]
 
     [h1] 特徴 [/h1]
     [list]
@@ -56,12 +49,6 @@
     [*] 神器品質のアイテムを保証します。
     [*] 新しいレベルスケーリングに基づいて、バニラのルール内でアイテムにエンチャントとソケットを追加します。
     [*] 設定可能なコスト倍率で、ポッド042とポッド153から購入する価格を調整できます。
-    [/list]
-
-    [h1] 必要条件 [/h1]
-    このMODの基本機能には [b](Stable) Custom Whatever Loader[/b] が必要です。互換性を確保するために、[b](Stable) Custom Whatever Loader[/b] を購読してください：
-    [list]
-    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3544010094]https://steamcommunity.com/sharedfiles/filedetails/?id=3544010094[/url]
     [/list]
 
     [h1] 互換性 [/h1]
@@ -75,7 +62,6 @@
     整数値で指定してください（例: 2 は価格が2倍、3 は価格が3倍になります）。
     売却価格はバニラのままです。
     1未満の値は1として扱われ、100を超える値は100として扱われます。
-    ゲームの整数上限を超える最終取引価格は2147483646に制限されます。
     [code] 初期値: 1 [/code]
 
     [h2] 商人インベントリ幅 [/h2]
@@ -87,9 +73,9 @@
     [h1] 設定ファイルの場所 [/h1]
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.omegasequipmentmerchants.cfg [/code]
 
-    [img] https://img.shields.io/badge/対応ゲームバージョン-EA%2023.307%20Stable-green [/img]
+    [img] https://img.shields.io/badge/対応ゲームバージョン-EA%2023.325%20Stable-green [/img]
   </description>
-  <tags>General,Balance</tags>
+  <tags>General,Balance,NPC,Cheat</tags>
   <visibility>Public</visibility>
-  <version>0.23.307</version>
+  <version>0.23.325</version>
 </Meta>

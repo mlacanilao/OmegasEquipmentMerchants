@@ -6,7 +6,7 @@ internal static class ShopTransactionPatch
     private const string ArmorMerchantId = "pod153";
     private const int MaxValidTransactionPrice = int.MaxValue - 1;
 
-    internal static void GetPricePostfix(ShopTransaction __instance, bool sell, ref int __result)
+    internal static void GetPricePostfix(ShopTransaction __instance, Thing thing, int count, bool sell, ref int __result)
     {
         if (EClass.core?.IsGameStarted != true)
         {
@@ -23,14 +23,36 @@ internal static class ShopTransactionPatch
             return;
         }
 
-        string? ownerId = __instance.trader?.owner?.id;
+        InvOwner trader = __instance.trader;
+        if (trader is null)
+        {
+            return;
+        }
+
+        if (thing is null)
+        {
+            return;
+        }
+
+        string? ownerId = trader.owner?.id;
         if (ownerId != WeaponMerchantId && ownerId != ArmorMerchantId)
         {
             return;
         }
 
         int costMultiplier = OmegasEquipmentMerchantsConfig.GetCostMultiplier();
-        long multipliedPrice = (long)__result * costMultiplier;
+        long vanillaBuybackTotal = GetSameTransactionBuybackTotal(
+            transaction: __instance,
+            thing: thing,
+            count: count,
+            trader: trader);
+        long merchantStockTotal = (long)__result - vanillaBuybackTotal;
+        if (merchantStockTotal < 0L)
+        {
+            return;
+        }
+
+        long multipliedPrice = vanillaBuybackTotal + merchantStockTotal * costMultiplier;
         string priceState = "normal";
         if (multipliedPrice >= int.MaxValue)
         {
@@ -58,5 +80,52 @@ internal static class ShopTransactionPatch
                     priceState +
                     ", result=" +
                     __result.ToString());
+    }
+
+    private static long GetSameTransactionBuybackTotal(
+        ShopTransaction transaction,
+        Thing thing,
+        int count,
+        InvOwner trader)
+    {
+        if (count <= 0)
+        {
+            return 0L;
+        }
+
+        int remainingCount = count;
+        long buybackTotal = 0L;
+        long vanillaSellPrice = thing.GetPrice(currency: trader.currency, sell: true, priceType: trader.priceType);
+        foreach (var item in transaction.sold)
+        {
+            if (item is null)
+            {
+                continue;
+            }
+
+            if (item.thing == null)
+            {
+                continue;
+            }
+
+            if (item.thing.id == thing.id && (long)item.price == vanillaSellPrice)
+            {
+                int matchedCount = item.num;
+                if (matchedCount > remainingCount)
+                {
+                    matchedCount = remainingCount;
+                }
+
+                remainingCount -= matchedCount;
+                buybackTotal += (long)matchedCount * vanillaSellPrice;
+            }
+
+            if (remainingCount == 0)
+            {
+                break;
+            }
+        }
+
+        return buybackTotal;
     }
 }

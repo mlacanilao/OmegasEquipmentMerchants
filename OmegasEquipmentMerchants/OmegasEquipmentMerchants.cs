@@ -8,7 +8,7 @@ internal static class ModInfo
 {
     internal const string Guid = "omegaplatinum.elin.omegasequipmentmerchants";
     internal const string Name = "Omegas Equipment Merchants";
-    internal const string Version = "3.0.0";
+    internal const string Version = "4.0.0";
 }
 
 [BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
